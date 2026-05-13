@@ -1,0 +1,33 @@
+{
+  "id": "@topogram/extractor-drizzle-db",
+  "version": "1",
+  "tracks": [
+    "db"
+  ],
+  "source": "package",
+  "package": "@topogram/extractor-drizzle-db",
+  "stack": {
+    "orm": "drizzle",
+    "database": "relational"
+  },
+  "capabilities": {
+    "schema": true,
+    "migrations": true,
+    "maintainedDbSeams": true
+  },
+  "candidateKinds": [
+    "entity",
+    "enum",
+    "relation",
+    "index",
+    "maintained_db_migration_seam"
+  ],
+  "evidenceTypes": [
+    "runtime_source",
+    "parser_config"
+  ],
+  "extractors": [
+    "db.drizzle-package"
+  ]
+}
+

@@ -1,0 +1,25 @@
+name: Package Access
+
+on:
+  workflow_dispatch:
+
+jobs:
+  verify-access:
+    name: Verify npm package access
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          scope: "@topogram"
+      - name: Ensure public access
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm access set status=public @topogram/extractor-drizzle-db
+      - name: Verify public package resolution
+        run: npm view @topogram/extractor-drizzle-db version --registry=https://registry.npmjs.org/
+

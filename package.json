@@ -1,0 +1,34 @@
+{
+  "name": "@topogram/extractor-drizzle-db",
+  "version": "0.1.0",
+  "description": "Package-backed Topogram extractor for Drizzle database schemas and migrations.",
+  "license": "Apache-2.0",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/attebury/topogram-extractor-drizzle-db.git"
+  },
+  "main": "index.cjs",
+  "exports": {
+    ".": "./index.cjs",
+    "./topogram-extractor.json": "./topogram-extractor.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.cjs",
+    "topogram-extractor.json",
+    "README.md"
+  ],
+  "scripts": {
+    "check": "node ./scripts/check-extractor.mjs",
+    "pack:check": "npm run check"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "devDependencies": {
+    "@topogram/cli": "^0.3.80"
+  }
+}
+
