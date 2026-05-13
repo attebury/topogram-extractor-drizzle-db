@@ -20,7 +20,7 @@
     "README.md"
   ],
   "scripts": {
-    "check": "node ./scripts/check-extractor.mjs",
+    "check": "node ./scripts/check-extractor.mjs && node ./scripts/verify.mjs",
     "pack:check": "npm run check"
   },
   "publishConfig": {
@@ -31,4 +31,3 @@
     "@topogram/cli": "^0.3.80"
   }
 }
-
