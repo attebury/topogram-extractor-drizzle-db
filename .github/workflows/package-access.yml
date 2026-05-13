@@ -21,5 +21,12 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm access set status=public @topogram/extractor-drizzle-db
       - name: Verify public package resolution
-        run: npm view @topogram/extractor-drizzle-db version --registry=https://registry.npmjs.org/
-
+        run: |
+          for attempt in 1 2 3 4 5; do
+            if npm view @topogram/extractor-drizzle-db version --registry=https://registry.npmjs.org/; then
+              exit 0
+            fi
+            echo "Package not visible yet; retrying in 15s ($attempt/5)."
+            sleep 15
+          done
+          npm view @topogram/extractor-drizzle-db version --registry=https://registry.npmjs.org/
