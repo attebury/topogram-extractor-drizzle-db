@@ -28,6 +28,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "@topogram/cli": "^0.3.92"
+    "@topogram/cli": "^0.3.93"
   }
 }
