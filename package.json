@@ -21,7 +21,11 @@
   ],
   "scripts": {
     "check": "node ./scripts/check-extractor.mjs && node ./scripts/verify.mjs",
-    "pack:check": "npm run check"
+    "pack:check": "npm pack --dry-run",
+    "docs:rag:build": "node ./scripts/build-llms-full.mjs",
+    "docs:rag:check": "node ./scripts/verify-docs-rag.mjs",
+    "security:secrets": "node ./scripts/run-secret-scan.mjs",
+    "release:preflight": "npm run check && npm run docs:rag:check && npm run pack:check && npm run security:secrets"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",

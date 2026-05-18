@@ -13,20 +13,37 @@ on:
         default: latest
         type: string
 
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   publish:
     name: Publish to npmjs
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2.3.9
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_COMMENTS: false
+          GITLEAKS_ENABLE_SUMMARY: true
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: true
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
       - uses: actions/setup-node@v6
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
           scope: "@topogram"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
       - name: Set package version
         run: |
           CURRENT="$(node -p "require('./package.json').version")"
@@ -36,9 +53,11 @@ jobs:
             echo "Package version already set to $CURRENT"
           fi
       - name: Verify
+        env:
+          TOPOGRAM_SECRET_SCAN_ALREADY_RAN: "1"
         run: |
           TOPOGRAM_CLI_VERSION="$(cat topogram-cli.version)"
-          TOPOGRAM_CLI_PACKAGE_SPEC="@topogram/cli@$TOPOGRAM_CLI_VERSION" npm run check
+          TOPOGRAM_CLI_PACKAGE_SPEC="@topogram/cli@$TOPOGRAM_CLI_VERSION" npm run release:preflight
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

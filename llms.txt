@@ -1,0 +1,21 @@
+# @topogram/extractor-drizzle-db
+
+> Package-backed Topogram extractor with package-local release preflight.
+
+Use these commands:
+
+- `npm run docs:rag:build` regenerates `llms-full.txt`.
+- `npm run docs:rag:check` verifies package-local retrieval docs.
+- `npm run check` verifies the package behavior.
+- `npm run release:preflight` adds package dry-run and secret scanning before publish or broad sharing.
+
+## Start
+
+- [README](README.md): Author loop, package boundary, and release preflight.
+- [Agent Guide](AGENTS.md): Rules for humans and agents editing this package.
+
+## Package Contract
+
+- [Manifest](topogram-extractor.json): Topogram package manifest and compatibility contract.
+
+## Optional

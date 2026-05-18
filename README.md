@@ -1,5 +1,11 @@
 # @topogram/extractor-drizzle-db
 
+> Package-backed Topogram extractor for Drizzle database schemas and migrations.
+
+Status: current
+Audience: extractor package authors and maintainers
+Use when: you need to change extractor evidence recovery, manifests, package metadata, or release proof.
+
 Package-backed Topogram extractor for Drizzle database schemas and migrations.
 
 This package extracts review-only database candidates from Drizzle projects:
@@ -21,3 +27,12 @@ topogram extract ./brownfield-app --out ./topogram-review --from db --extractor 
 ```bash
 npm run check
 ```
+
+## Release Preflight
+
+```bash
+npm run release:preflight
+```
+
+The preflight runs package checks, docs/RAG verification, `npm pack --dry-run`,
+and Gitleaks secret scanning before publish or broad sharing.
